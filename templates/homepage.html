@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block content %}
+<h1 class="display-1">All Pets</h1>
+<table class="table table-bordered text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Species</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Age</th>
+            <th scope="col">Image</th>
+            <th scope="col">Notes</th>
+            <th scope="col">Availablity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pet in pets %}
+        <tr 
+        {{'class=table-active' if not pet.availability }}>
+            <th scope="row">{{pet.id}}</th>
+            <td><a href="/{{pet.id}}">{{pet.name}}</a></td>
+            <td>{{pet.species}}</td>
+            <td>{{pet.breed}}</td>
+            <td>{{pet.age}}</td>
+            <td><img style="width: 100px; height: 100px" class="rounded-circle" src="{{pet.photo_url}}" /></td>
+            <td>{{pet.notes}}</td>
+            <td>{{"Yes" if pet.availability else "No"}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-info" href="/add">Add New Pet</a>
+{% endblock %}
